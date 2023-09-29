@@ -9,18 +9,12 @@ import (
 	"time"
 
 	"github.com/gin-gonic/gin"
-	"github.com/joho/godotenv"
 )
 
 func main() {
 	gin.DisableConsoleColor()
 
-	err := godotenv.Load()
-	if err != nil {
-		panic(err)
-	}
-
-	f, _ := os.Create(fmt.Sprintf("%s-%s.log", os.Getenv("LOG_PATH"), strconv.FormatInt(time.Now().Unix(), 10)))
+	f, _ := os.Create(fmt.Sprintf("%s-%s.log", os.Getenv("GOAUTH_LOG_PATH"), strconv.FormatInt(time.Now().Unix(), 10)))
 	gin.DefaultWriter = io.MultiWriter(f, os.Stdout)
 
 	r := gin.Default()
